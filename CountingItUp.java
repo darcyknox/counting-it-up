@@ -28,6 +28,13 @@ public class CountingItUp {
       System.out.println(s);
   }
 
+  
+  /*The countUp method recursively implements n choose k. This method works on the basis that the 
+  fixed set "n" is comprised of the fixed set "n-1" plus one more (new) element. One of the elements in the subset "k" either 
+  includes this new element, or it doesn't. With the new element added to the original n-1 fixed set, the number of 
+  unordered subsets k will be equal to however many there were in the n-1 fixed set if the new element is not part 
+  of the subset k, plus (+), if the new element is part of the subset k, there will be k-1 remaining elements
+  to be put into the remaining n-1 elements. This calaculation is returned in result, and the method also handles the base case. */
     public static long countUp(long n, long k){
       if (k == 1) {
         return n;

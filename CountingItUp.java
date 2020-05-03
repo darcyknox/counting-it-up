@@ -10,7 +10,7 @@ public class CountingItUp {
   public static void main(String[] args) {
     long r = Long.MAX_VALUE;
 
-    if(args.length == 2){
+    if (args.length == 2) {
       long n = Long.parseLong(args[0]);
       long k = Long.parseLong(args[1]);
 
@@ -21,7 +21,7 @@ public class CountingItUp {
         System.out.println("For n = " +n+ " and k = " +k+ ", n choose k = " + Long.toUnsignedString(result));
       }
     } else {
-        System.err.println("Please enter n and k as command line arguments for the calculation.");
+      System.err.println("Please enter n and k as command line arguments for the calculation.");
     }
   }
 
@@ -32,13 +32,14 @@ public class CountingItUp {
   power and the denominator counts the number of distinct sequences that define the same k-combination when order is disregarded.
   This calaculation is returned in result, and the method also handles the base case.
   */
-    private static long nck(long n, long k) {
-      if (k == 1) {
-        return n;
-      } else if (k == 0 || n == k) {
-        return 1;
-      } else {
-        return (n * nck(n - 1,  k - 1)) / k;
-      }
+  private static long nck(long n, long k) {
+    if (k == 1) {
+      return n;
+    } else if (k == 0 || n == k) {
+      return 1;
+    } else {
+      return (n * nck(n - 1,  k - 1)) / k;
     }
+  }
+  
 }

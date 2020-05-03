@@ -54,8 +54,11 @@ public class CountingItUp {
       } else if (k == 0 || n == k) {
         return 1;
       } else {
-        long result = (n * nck(n - 1, k - 1)) / k;
-        return result;
+        try {
+          return Math.multiplyExact(n, nck(n - 1, k - 1)) / k;
+        } catch (ArithmeticException e) {
+          return 0;
+        }
       }
     }
 }

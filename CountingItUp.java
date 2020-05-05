@@ -3,6 +3,8 @@ import java.lang.Math;
 
 public class CountingItUp {
 
+  /* Multiplicative formula
+
   /*
   The main method takes command line arguments n and k on which to find the result n choose k, where either term can be a 64-bit integer.
   This method also handles invalid empty and negative arguments, and prints a statement with the result of n choose k.
@@ -16,9 +18,11 @@ public class CountingItUp {
 
       if (n < 0 || k < 0) {
         System.out.println("Input cannot be negative");
+      } else if (n < k) {
+        System.out.println("n should be greater than k");
       } else {
         long result = nck(n, k);
-        System.out.println("For n = " +n+ " and k = " +k+ ", n choose k = " + Long.toUnsignedString(result));
+        System.out.println("n = " + n + " k = " + k + " nck = " + Long.toUnsignedString(result));
       }
     } else {
       System.err.println("Please enter n and k as command line arguments for the calculation.");
@@ -41,5 +45,5 @@ public class CountingItUp {
       return (n * nck(n - 1,  k - 1)) / k;
     }
   }
-  
+
 }

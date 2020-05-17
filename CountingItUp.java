@@ -1,9 +1,11 @@
 import java.util.*;
 import java.lang.Math;
 
+// Authors: Darcy Knox & William Wallace
+
 public class CountingItUp {
 
-  /* Multiplicative formula
+  // Calculates a binomial coefficient (n choose k)
 
   /*
   The main method takes command line arguments n and k on which to find the result n choose k, where either term can be a 64-bit integer.
@@ -29,26 +31,34 @@ public class CountingItUp {
     }
   }
 
-  
+
   private static String nck(long n, long k) {
     ArrayList<Long> nums = new ArrayList<>();
     ArrayList<Long> dens = new ArrayList<>();
     ArrayList<Long> primes = new ArrayList<>();
 
+    // Always take the smaller k
     if (k > n - k) {
       k = n - k;
     }
 
+    // Numerator terms list
+    // (n down to n - k)
     for (long i = 0; i < k; i++) {
       nums.add(n - i);
     }
     System.out.println(nums);
+
+    // Denominator terms list
+    // (k down to 1)
     for (long i = k; i > 0; i--) {
       dens.add(i);
     }
     System.out.println(dens);
 
 
+    // Cancel out denominator elements
+    // Get prime factors of denominators
     for (int i = 0; i < dens.size(); i++) {
 
       while ((dens.get(i) != 0) && (dens.get(i) % 2 == 0)) { // while denominator is divisible by 2
@@ -56,12 +66,12 @@ public class CountingItUp {
         dens.set(i, dens.get(i) / 2);
         //nums.set(i, nums.get(i) / 2);
       }
-      while ((dens.get(i) != 0) && (dens.get(i) % 3 == 0)) {
+      while ((dens.get(i) != 0) && (dens.get(i) % 3 == 0)) { // while denominator is divisible by 3
         primes.add((long) 3);
         dens.set(i, dens.get(i) / 3);
         //nums.set(i, nums.get(i) / 3);
       }
-      while ((dens.get(i) != 0) && (dens.get(i) % 5 == 0)) {
+      while ((dens.get(i) != 0) && (dens.get(i) % 5 == 0)) { // while denominator is divisible by 5
         primes.add((long) 5);
         dens.set(i, dens.get(i) / 5);
         //nums.set(i, nums.get(i) / 5);
@@ -77,38 +87,19 @@ public class CountingItUp {
     System.out.println(primes);
 
     // Cancel out numerator terms by prime terms
+    // Prime terms are prime factors common to a numerator and denominator
     for (int i = 0; i < nums.size(); i++) {
       for (int j = 0; j < primes.size(); j++) {
         if (nums.get(i) % primes.get(j) == 0) {
-          //System.out.println(Long.toString(nums.get(i)) + ' ' + Long.toString(primes.get(j)));
-          nums.set(i, nums.get(i) / primes.get(j));
-          primes.set(j, (long) 1);
+          nums.set(i, nums.get(i) / primes.get(j)); // divide numerator term by its prime factor
+          primes.set(j, (long) 1); // divide prime by itself to get 1
         }
       }
     }
 
-    /*
-    for (int i = 0; i < top.size(); i++) {
-        //for each
-        for (int j = 0; j < bottom.size(); j++) {
-            if (top.get(i) % bottom.get(j) == 0) {
-                top.set(i, top.get(i) / bottom.get(j));
-                bottom.set(j, 1L);
-            }
-        }
-    }
-    */
 
-    System.out.println("Nums");
-    System.out.println(nums);
-    System.out.println("Dens");
-    System.out.println(dens);
-    System.out.println("Primes");
-    System.out.println(primes);
-
-
+    // nCk is the product all numerator terms
     long nCk = 1;
-
     for (int i = 0; i < k; i++) {
       if (nCk * nums.get(i) / nCk != nums.get(i)) {
         return "Overflow";

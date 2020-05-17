@@ -29,16 +29,11 @@ public class CountingItUp {
     }
   }
 
-  /*
-  The nck method recursively implements the multiplicative formula to calculate binomial coefficients. Here, nck(n - 1, k - 1)
-  represents the binomial coefficient of the previous term i.e. where an element has been subtracted from the current set and
-  where k was part of that set.
-  This calaculation is returned in result, and the method also handles the base case.
-  */
+  
   private static String nck(long n, long k) {
     ArrayList<Long> nums = new ArrayList<>();
     ArrayList<Long> dens = new ArrayList<>();
-    ArrayList<Integer> primes = new ArrayList<>();
+    ArrayList<Long> primes = new ArrayList<>();
 
     if (k > n - k) {
       k = n - k;
@@ -47,50 +42,69 @@ public class CountingItUp {
     for (long i = 0; i < k; i++) {
       nums.add(n - i);
     }
-    //System.out.println(nums);
+    System.out.println(nums);
     for (long i = k; i > 0; i--) {
       dens.add(i);
     }
-    //System.out.println(dens);
+    System.out.println(dens);
 
 
     for (int i = 0; i < dens.size(); i++) {
+
       while ((dens.get(i) != 0) && (dens.get(i) % 2 == 0)) { // while denominator is divisible by 2
-        primes.add(2);
+        primes.add((long) 2);
         dens.set(i, dens.get(i) / 2);
         //nums.set(i, nums.get(i) / 2);
       }
       while ((dens.get(i) != 0) && (dens.get(i) % 3 == 0)) {
-        primes.add(3);
+        primes.add((long) 3);
         dens.set(i, dens.get(i) / 3);
         //nums.set(i, nums.get(i) / 3);
       }
       while ((dens.get(i) != 0) && (dens.get(i) % 5 == 0)) {
-        primes.add(5);
+        primes.add((long) 5);
         dens.set(i, dens.get(i) / 5);
         //nums.set(i, nums.get(i) / 5);
       }
-      while ((dens.get(i) != 0) && (dens.get(i) % 7 == 0)) {
-        primes.add(7);
-        dens.set(i, dens.get(i) / 7);
-        //nums.set(i, nums.get(i) / 7);
-      }
       if (dens.get(i) > 1) {
-        nums.set(i, nums.get(i) / dens.get(i));
+        primes.add(dens.get(i));
+        //nums.set(i, nums.get(i) / dens.get(i));
       }
-    }
-    //System.out.println(primes);
 
+    }
+
+
+    System.out.println(primes);
 
     // Cancel out numerator terms by prime terms
     for (int i = 0; i < nums.size(); i++) {
       for (int j = 0; j < primes.size(); j++) {
         if (nums.get(i) % primes.get(j) == 0) {
+          //System.out.println(Long.toString(nums.get(i)) + ' ' + Long.toString(primes.get(j)));
           nums.set(i, nums.get(i) / primes.get(j));
-          primes.set(j, 1);
+          primes.set(j, (long) 1);
         }
       }
     }
+
+    /*
+    for (int i = 0; i < top.size(); i++) {
+        //for each
+        for (int j = 0; j < bottom.size(); j++) {
+            if (top.get(i) % bottom.get(j) == 0) {
+                top.set(i, top.get(i) / bottom.get(j));
+                bottom.set(j, 1L);
+            }
+        }
+    }
+    */
+
+    System.out.println("Nums");
+    System.out.println(nums);
+    System.out.println("Dens");
+    System.out.println(dens);
+    System.out.println("Primes");
+    System.out.println(primes);
 
 
     long nCk = 1;
@@ -101,10 +115,6 @@ public class CountingItUp {
       }
       nCk *= nums.get(i);
     }
-
-    //System.out.println(nums);
-    //System.out.println(dens);
-    //System.out.println(primes);
 
     return Long.toUnsignedString(nCk);
   }

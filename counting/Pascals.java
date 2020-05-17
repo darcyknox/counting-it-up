@@ -109,6 +109,12 @@ public class Pascals {
                 }
             }
         }
+        System.out.println("Nums");
+        System.out.println(top);
+        System.out.println("Dens");
+        System.out.println(bottom);
+
+
 
 
     }

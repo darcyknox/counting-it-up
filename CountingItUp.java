@@ -1,6 +1,7 @@
 import java.util.*;
 import java.lang.Math;
 
+// COSC363 Etude 4 - Counting It Up
 // Authors: Darcy Knox & William Wallace
 
 public class CountingItUp {
@@ -47,14 +48,12 @@ public class CountingItUp {
     for (long i = 0; i < k; i++) {
       nums.add(n - i);
     }
-    System.out.println(nums);
 
     // Denominator terms list
     // (k down to 1)
     for (long i = k; i > 0; i--) {
       dens.add(i);
     }
-    System.out.println(dens);
 
 
     // Cancel out denominator elements
@@ -82,9 +81,6 @@ public class CountingItUp {
       }
 
     }
-
-
-    System.out.println(primes);
 
     // Cancel out numerator terms by prime terms
     // Prime terms are prime factors common to a numerator and denominator
